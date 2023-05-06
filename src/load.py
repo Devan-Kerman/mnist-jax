@@ -9,10 +9,12 @@ import joblib
 
 threads = os.cpu_count() or 1
 
+
 def prefetch_iterable(values, size=2):
 	queue = collections.deque()
 
 	iterator = iter(values)
+
 	def enqueue(n):
 		for value in itertools.islice(iterator, n):
 			queue.append([jax.device_put(value)])
@@ -24,8 +26,10 @@ def prefetch_iterable(values, size=2):
 		yield ret
 		jax.device_get(ret)
 
+
 def normalize(entry):
 	return {'label': entry['label'], 'image': entry['image'].reshape(28, 28, 1) / 255.0}
+
 
 def make_batch(entries):
 	copy = {}
@@ -33,8 +37,10 @@ def make_batch(entries):
 		copy[k] = [np.array(v)]
 	return copy
 
+
 def map_iter(collect, map_func):
 	return joblib.Parallel(n_jobs=min(len(collect), threads))(joblib.delayed(map_func)(i) for i in collect)
+
 
 def get_datasets(num_epochs, batch_size):
 	"""Load MNIST train and test datasets into memory."""

@@ -2,6 +2,7 @@ import os
 import subprocess
 import sys
 
+
 def run_command(command):
 	process = subprocess.Popen(command, shell=True)
 	process.wait()

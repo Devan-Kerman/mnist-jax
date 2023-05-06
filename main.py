@@ -51,7 +51,7 @@ for epoch, (train_batches, test_batches) in enumerate(zip(train_ds, test_ds)):
 		i += 1
 	end = time.time()
 
-	print(f"Total prefetch wait time: {total_fetch*1000:5.2f}ms for {i} entries!")
+	print(f"Total prefetch wait time: {total_fetch * 1000:5.2f}ms for {i} entries!")
 	print(f"Trained epoch: {epoch + 1} in {end - start:5.2f}s!")
 	for metric, value in state.metrics.compute().items():  # compute metrics
 		metrics_history[f'train_{metric}'].append(value)  # record metrics
