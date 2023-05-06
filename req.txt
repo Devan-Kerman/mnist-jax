@@ -1,4 +1,0 @@
-clu
-matplotlib
-flax
-datasets
